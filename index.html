@@ -6,8 +6,8 @@
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>What Moves Markets?</title><meta name="generator" content="MATLAB 9.7"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2021-11-23"><meta name="DC.source" content="EventDatabaseOverview.m"><style type="text/css">
-html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+      --><title>What Moves Markets?</title><meta name="generator" content="MATLAB 9.11"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2022-01-03"><meta name="DC.source" content="EventDatabaseOverview.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
 
 html { min-height:100%; margin-bottom:1px; }
 html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
@@ -23,7 +23,7 @@ a:visited { color:#004aa0; text-decoration:none; }
 
 p { padding:0px; margin:0px 0px 20px; }
 img { padding:0px; margin:0px 0px 20px; border:none; }
-p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; } 
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; }
 
 ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
 ul li { padding:0px; margin:0px 0px 7px 0px; }
@@ -52,6 +52,7 @@ span.comment { color:#228B22 }
 span.string { color:#A020F0 }
 span.untermstring { color:#B20000 }
 span.syscmd { color:#B28C00 }
+span.typesection { color:#A0522D }
 
 .footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
 .footer p { margin:0px; }
@@ -66,9 +67,7 @@ table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px soli
 
 
 
-  </style></head><body><div class="content"><h1>What Moves Markets?</h1><!--introduction--><p>This code gives a basic overview of the event database from the paper "What Moves Markets?" by Mark Kerssenfischer and Maik Schmeling</p><p>Notes:</p><div><ul><li>All intraday timestamps refer to GMT.</li><li>The database currently contains three types of events: 1) auctions (announcements and results; for the US and Germany; from the websites of the US Treasury and the German Finance Agency), 2) central bank announcements (for eight major central banks), and 3) ad hoc events (such as natural catastophies, rating events, etc.)</li><li>The database does currently not contain events from Bloomberg, such as macroeconomic data releases and auctions regarding France, Italy, Spain</li></ul></div><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#2">Data Format</a></li><li><a href="#3">Event Categories</a></li><li><a href="#4">Event Sub-Categories</a></li><li><a href="#5">Central Bank Announcements</a></li><li><a href="#6">number of central bank events by intraday time</a></li></ul></div><h2 id="2">Data Format</h2><p>display first ten rows of event database</p><pre class="codeoutput">  10&times;6 timetable
-
-       eventstart           eventend             type              subtype             subsubtype                             description                         scheduled
+  </style></head><body><div class="content"><h1>What Moves Markets?</h1><!--introduction--><p>This code gives a basic overview of the event database from the paper "What Moves Markets?" by Mark Kerssenfischer and Maik Schmeling</p><p>Notes:</p><div><ul><li>All intraday timestamps refer to GMT.</li><li>The database currently contains three types of events: 1) auctions, 2) central bank announcements and 3) ad hoc events. Auctions include announcements and results for the US and Germany and are taken from the websites of the US Treasury and the German Finance Agency. Central bank announcements cover eight major central banks. Ad hoc events include natural catastophies, rating events, etc.</li><li>The database does currently not contain events from Bloomberg, such as macroeconomic data releases and auctions regarding France, Italy, Spain</li></ul></div><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#2">Data Format</a></li><li><a href="#3">Number of Events by Type</a></li><li><a href="#4">Number of Events by Subtype</a></li><li><a href="#5">Events over Time</a></li><li><a href="#6">Central Bank Announcements over Time</a></li><li><a href="#7">Central Bank Announcements by Intraday Time</a></li></ul></div><h2 id="2">Data Format</h2><p>display first ten rows of event database</p><pre class="codeoutput">       eventstart           eventend             type              subtype             subsubtype                             description                         scheduled
     ________________    ________________    ______________    _________________    __________________    _____________________________________________________    _________
 
     04.03.2002 16:30                 NaT    "Auction"         "US Announcement"    "Bill"                "CUSIP 912795JN2"                                          true   
@@ -82,7 +81,17 @@ table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px soli
     07.03.2002 13:30    07.03.2002 14:08    "Central Bank"    "ECB"                "Press Conference"    "GCM PC"                                                   true   
     07.03.2002 15:00    07.03.2002 17:35    "Central Bank"    "Fed"                "Speech by Chair"     "Greenspan Senate Testimony (Monetary Policy Report)"      true   
 
-</pre><h2 id="3">Event Categories</h2><p>number of monthly events for each category</p><img vspace="5" hspace="5" src="EventDatabaseOverview_01.png" alt=""> <h2 id="4">Event Sub-Categories</h2><p>number of quarterly events for each subcategory</p><img vspace="5" hspace="5" src="EventDatabaseOverview_02.png" alt=""> <img vspace="5" hspace="5" src="EventDatabaseOverview_03.png" alt=""> <img vspace="5" hspace="5" src="EventDatabaseOverview_04.png" alt=""> <h2 id="5">Central Bank Announcements</h2><p>number of quarterly events for each central bank</p><img vspace="5" hspace="5" src="EventDatabaseOverview_05.png" alt=""> <img vspace="5" hspace="5" src="EventDatabaseOverview_06.png" alt=""> <img vspace="5" hspace="5" src="EventDatabaseOverview_07.png" alt=""> <img vspace="5" hspace="5" src="EventDatabaseOverview_08.png" alt=""> <img vspace="5" hspace="5" src="EventDatabaseOverview_09.png" alt=""> <img vspace="5" hspace="5" src="EventDatabaseOverview_10.png" alt=""> <img vspace="5" hspace="5" src="EventDatabaseOverview_11.png" alt=""> <img vspace="5" hspace="5" src="EventDatabaseOverview_12.png" alt=""> <h2 id="6">number of central bank events by intraday time</h2><img vspace="5" hspace="5" src="EventDatabaseOverview_13.png" alt=""> <p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2019b</a><br></p></div><!--
+</pre><h2 id="3">Number of Events by Type</h2><pre class="codeoutput">    Auction    Central Bank    Ad Hoc    Total
+    _______    ____________    ______    _____
+
+     10471         4516         1157     16144
+
+</pre><h2 id="4">Number of Events by Subtype</h2><p>For each type of event, show a "treemap" of subtypes and, if available, subsubtypes. The areas correspond to the number of events.</p><pre class="codeoutput">|||||||||||||||||||||||||||||||||||||||||||||||||| Event Type: Ad Hoc ||||||||||||||||||||||||||||||||||||||||||||||||||
+</pre><img vspace="5" hspace="5" src="EventDatabaseOverview_01.png" alt=""> <pre class="codeoutput">|||||||||||||||||||||||||||||||||||||||||||||||||| Event Type: Auction ||||||||||||||||||||||||||||||||||||||||||||||||||
+</pre><img vspace="5" hspace="5" src="EventDatabaseOverview_02.png" alt=""> <img vspace="5" hspace="5" src="EventDatabaseOverview_03.png" alt=""> <pre class="codeoutput">|||||||||||||||||||||||||||||||||||||||||||||||||| Event Type: Central Bank ||||||||||||||||||||||||||||||||||||||||||||||||||
+</pre><img vspace="5" hspace="5" src="EventDatabaseOverview_04.png" alt=""> <img vspace="5" hspace="5" src="EventDatabaseOverview_05.png" alt=""> <h2 id="5">Events over Time</h2><pre class="codeoutput">Number of monthly events for each type:
+</pre><img vspace="5" hspace="5" src="EventDatabaseOverview_06.png" alt=""> <pre class="codeoutput">Number of quarterly events for each subtype:
+</pre><img vspace="5" hspace="5" src="EventDatabaseOverview_07.png" alt=""> <img vspace="5" hspace="5" src="EventDatabaseOverview_08.png" alt=""> <img vspace="5" hspace="5" src="EventDatabaseOverview_09.png" alt=""> <h2 id="6">Central Bank Announcements over Time</h2><p>number of quarterly events for each central bank</p><img vspace="5" hspace="5" src="EventDatabaseOverview_10.png" alt=""> <img vspace="5" hspace="5" src="EventDatabaseOverview_11.png" alt=""> <img vspace="5" hspace="5" src="EventDatabaseOverview_12.png" alt=""> <img vspace="5" hspace="5" src="EventDatabaseOverview_13.png" alt=""> <img vspace="5" hspace="5" src="EventDatabaseOverview_14.png" alt=""> <img vspace="5" hspace="5" src="EventDatabaseOverview_15.png" alt=""> <img vspace="5" hspace="5" src="EventDatabaseOverview_16.png" alt=""> <img vspace="5" hspace="5" src="EventDatabaseOverview_17.png" alt=""> <h2 id="7">Central Bank Announcements by Intraday Time</h2><p>number of events by hour of the day</p><img vspace="5" hspace="5" src="EventDatabaseOverview_18.png" alt=""> <p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2021b</a><br></p></div><!--
 ##### SOURCE BEGIN #####
 %% What Moves Markets?
 % This code gives a basic overview of the event database from
@@ -92,11 +101,12 @@ table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px soli
 % Notes:
 %
 % * All intraday timestamps refer to GMT.
-% * The database currently contains three types of events: 1) auctions 
-% (announcements and results; for the US and Germany; from the websites of 
-% the US Treasury and the German Finance Agency), 2) central bank 
-% announcements (for eight major central banks), and 3) ad hoc events 
-% (such as natural catastophies, rating events, etc.)
+% * The database currently contains three types of events: 1) auctions,
+% 2) central bank announcements and 3) ad hoc events.
+% Auctions include announcements and results for the US and Germany and are 
+% taken from the websites of the US Treasury and the German Finance Agency.
+% Central bank announcements cover eight major central banks. 
+% Ad hoc events include natural catastophies, rating events, etc.
 % * The database does currently not contain events from Bloomberg, such as 
 % macroeconomic data releases and auctions regarding France, Italy, Spain
 
@@ -105,47 +115,85 @@ clear
 % load event database
 load('WhatMovesMarkets_eventdatabase.mat')
 
-%ind = ~cellfun(@isempty,Tevents.description) & [false; diff(double(categorical(Tevents.type)))~=0];
-%temp = head(Tevents(ind,:));
-% temp = timetable2table(Tevents(1:10,:));
-% temp.eventend = repmat({''},size(temp,1),1);
-% temp.eventstart = cellstr(datestr(temp.eventstart,'dd.mm.yyyy HH:MM'));
-% temp.eventend(~isnat(Tevents.eventend(1:10))) = cellstr(datestr(Tevents.eventend(~isnat(Tevents.eventend(1:10))),...    
-%                                                 'dd.mm.yyyy HH:MM'));
-% 
-% temp2 = table2cell(temp);
-% 
-% fileID = fopen('./tablehead.tex','w');
-% fprintf(fileID,'%s & %s & %s & %s & %s & %s & %s\\\\ \n',temp.Properties.VariableNames{:});
-% formatSpec =   '%s & %s & %s & %s & %s & %s & %d\\\\ \n';
-% for row = 1:size(temp2,1)
-%     fprintf(fileID,formatSpec,temp2{row,:});
-% end
-% fclose(fileID);
+% colors
+tempcol = lines(7);
+tempcol(8,:) = repmat(.7,1,3);
+% central bank list
+cblist = unique(Tevents.subtype(strcmp(Tevents.type,'Central Bank')));
+cblist = cblist([5 4 2 3 7 8 1 6]);
+% figure size in cm
+figsiz = [16 9];
 
 %% Data Format
 % display first ten rows of event database
-display(Tevents(1:10,:));
+disp(Tevents(1:10,:))
 
 
-%% Event Categories
-% number of monthly events for each category
+%% Number of Events by Type
+% 
+tbl = tabulate(Tevents.type);
+tbl = array2table(cell2mat(tbl(:,2))','VariableNames',tbl(:,1));
+tbl.Total = sum(tbl{:,:});
+disp(tbl); 
+
+%% Number of Events by Subtype
+% For each type of event, show a "treemap" of subtypes and, if available, 
+% subsubtypes. The areas correspond to the number of events.
+listi = unique(Tevents.type)';
+for i=1:length(listi)
+    fprintf('%s Event Type: %s %s\n',repmat('|',1,50),listi(i),repmat('|',1,50))
+    tbl = tabulate(Tevents.subtype(strcmp(Tevents.type,listi(i))));
+    tbl = array2table(cell2mat(tbl(:,2)),'RowNames',tbl(:,1));
+    tbl = sortrows(tbl,'Var1','descend');
+    
+    rectangles = treemap(tbl{:,:},16,9);    
+    % translate rectangles to relative units
+    rectangles([1 3],:) = rectangles([1 3],:)/16;
+    rectangles([2 4],:) = rectangles([2 4],:)/9;
+    figure;
+    outline(rectangles)    
+    plotRectangles(rectangles,strcat(tbl.Properties.RowNames,{': '},num2str(tbl{:,:})),tempcol)
+    set(gcf,'Units','centimeters', 'Position', [0 0 figsiz],'PaperUnits','centimeters','PaperSize',figsiz)
+    snapnow;
+    if i>1
+    %fprintf('Further split by subsubtype:\n')
+        figure
+        listii = tbl.Properties.RowNames;
+        for ii=1:length(listii)
+            if any(~strcmp(Tevents.subsubtype(strcmp(Tevents.type,listi(i)) & strcmp(Tevents.subtype,listii(ii))),"")) 
+                tbl = tabulate(Tevents.subsubtype(strcmp(Tevents.type,listi(i)) & strcmp(Tevents.subtype,listii(ii))));
+                tbl = array2table(cell2mat(tbl(:,2)),'RowNames',tbl(:,1));
+                tbl = sortrows(tbl,'Var1','descend');
+                rNew = treemap(tbl{:,:},rectangles(3,ii),rectangles(4,ii));
+                % position rectangle within rectangle
+                rNew(1,:) = rNew(1,:) + rectangles(1,ii);
+                rNew(2,:) = rNew(2,:) + rectangles(2,ii);
+                outline(rNew)    
+                plotRectangles(rNew,tbl.Properties.RowNames,repmat(tempcol(ii,:),size(tbl,1),1))
+            end
+        end
+        set(gcf,'Units','centimeters', 'Position', [0 0 figsiz],'PaperUnits','centimeters','PaperSize',figsiz)
+        snapnow;
+    end
+end
+close all
+
+%% Events over Time
+fprintf('Number of monthly events for each type:\n')
 eventtypes = unique(Tevents.type);
+figure
 hold on
 for i=1:length(eventtypes)
     [ia,~,ic] = unique(dateshift(Tevents.eventstart(strcmp(Tevents.type,eventtypes{i})),'start','month'));
     plot(ia,accumarray(ic,1),'LineWidth',2)
     grid on
 end
-set(gcf,'Units','centimeters', 'Position', [0 0 17 9],'PaperUnits','centimeters','PaperSize',[17 9])
-set(gca(), 'LooseInset', get(gca(), 'TightInset')+[0 -.05 .02 0]);
+set(gcf,'Units','centimeters', 'Position', [0 0 figsiz],'PaperUnits','centimeters','PaperSize',figsiz)
 legend(eventtypes,'Location','SouthOutside','Orientation','Horizontal')
+snapnow;
 
-%% Event Sub-Categories
-% number of quarterly events for each subcategory
+fprintf('Number of quarterly events for each subtype:\n')
 subtypes = cell(1,length(eventtypes));
-tempcol = lines(7);
-tempcol(8,:) = repmat(.7,1,3);
 for i=1:length(eventtypes)
     Tsubtyp = timetable('RowTimes',unique(dateshift(Tevents.eventstart,'start','quarter')));
     subtypes = unique(Tevents.subtype(strcmp(Tevents.type,eventtypes{i})));    
@@ -164,15 +212,12 @@ for i=1:length(eventtypes)
     xticklabels(Tsubtyp.Time.Year(ind))    
     legend(subtypes,'Location','EastOutside','NumColumns',1)
     title(sprintf('%s',eventtypes{i}))
-    set(gcf,'Units','centimeters', 'Position', [0 0 17 9],'PaperUnits','centimeters','PaperSize',[17 9])
-    set(gca(), 'LooseInset', get(gca(), 'TightInset')+[0 -.05 .02 0]);
+    set(gcf,'Units','centimeters', 'Position', [0 0 figsiz],'PaperUnits','centimeters','PaperSize',figsiz)
 end
 
 
-%% Central Bank Announcements
+%% Central Bank Announcements over Time
 % number of quarterly events for each central bank
-cblist = unique(Tevents.subtype(strcmp(Tevents.type,'Central Bank')));
-cblist = cblist([5 4 2 3 7 8 1 6]);
 
 for i=1:length(cblist)
     Tcb = timetable('RowTimes',unique(dateshift(Tevents.eventstart,'start','quarter')));  
@@ -193,11 +238,12 @@ for i=1:length(cblist)
     xticklabels(Tcb.Time.Year(ind))    
     legend(subsubtypes,'Location','EastOutside','NumColumns',1)
     title(cblist{i})
-    set(gcf,'Units','centimeters', 'Position', [0 0 17 9],'PaperUnits','centimeters','PaperSize',[17 9])
-    set(gca(), 'LooseInset', get(gca(), 'TightInset')+[0 -.05 .02 0]);
+    set(gcf,'Units','centimeters', 'Position', [0 0 figsiz],'PaperUnits','centimeters','PaperSize',figsiz)
 end
 
-%% number of central bank events by intraday time
+%% Central Bank Announcements by Intraday Time
+% number of events by hour of the day
+
 Tcb_t = timetable('RowTimes',duration(unique(Tevents.eventstart.Hour),0,0));
 
 for i=1:length(cblist)
@@ -211,14 +257,12 @@ set(h, {'FaceColor'}, num2cell(tempcol(1:length(cblist),:),2));
 grid on    
 legend(cblist,'Location','EastOutside','NumColumns',1)
 title('Intraday Times of Central Bank Events')
-set(gcf,'Units','centimeters', 'Position', [0 0 17 9],'PaperUnits','centimeters','PaperSize',[17 9])
-set(gca(), 'LooseInset', get(gca(), 'TightInset')+[0 -.05 .02 0]);
+set(gcf,'Units','centimeters', 'Position', [0 0 figsiz],'PaperUnits','centimeters','PaperSize',figsiz)
 xticks(0:1:23)
 xlabel('Hour of Day (GMT)')
 
 %%
 close all
-
 
 
 
