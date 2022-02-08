@@ -6,7 +6,7 @@
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>What Moves Markets?</title><meta name="generator" content="MATLAB 9.11"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2022-01-03"><meta name="DC.source" content="EventDatabaseOverview.m"><style type="text/css">
+      --><title>What Moves Markets?</title><meta name="generator" content="MATLAB 9.11"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2022-02-08"><meta name="DC.source" content="EventDatabaseOverview.m"><style type="text/css">
 html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
 
 html { min-height:100%; margin-bottom:1px; }
@@ -67,24 +67,24 @@ table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px soli
 
 
 
-  </style></head><body><div class="content"><h1>What Moves Markets?</h1><!--introduction--><p>This code gives a basic overview of the event database from the paper "What Moves Markets?" by Mark Kerssenfischer and Maik Schmeling</p><p>Notes:</p><div><ul><li>All intraday timestamps refer to GMT.</li><li>The database currently contains three types of events: 1) auctions, 2) central bank announcements and 3) ad hoc events. Auctions include announcements and results for the US and Germany and are taken from the websites of the US Treasury and the German Finance Agency. Central bank announcements cover eight major central banks. Ad hoc events include natural catastophies, rating events, etc.</li><li>The database does currently not contain events from Bloomberg, such as macroeconomic data releases and auctions regarding France, Italy, Spain</li></ul></div><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#2">Data Format</a></li><li><a href="#3">Number of Events by Type</a></li><li><a href="#4">Number of Events by Subtype</a></li><li><a href="#5">Events over Time</a></li><li><a href="#6">Central Bank Announcements over Time</a></li><li><a href="#7">Central Bank Announcements by Intraday Time</a></li></ul></div><h2 id="2">Data Format</h2><p>display first ten rows of event database</p><pre class="codeoutput">       eventstart           eventend             type              subtype             subsubtype                             description                         scheduled
-    ________________    ________________    ______________    _________________    __________________    _____________________________________________________    _________
+  </style></head><body><div class="content"><h1>What Moves Markets?</h1><!--introduction--><p>This page gives a basic overview of the event database from the paper "What Moves Markets?" by Mark Kerssenfischer and Maik Schmeling</p><p>Notes:</p><div><ul><li>All intraday timestamps refer to Greenwich Mean Time (GMT).</li><li>The database currently contains three types of events: 1) auctions, 2) central bank announcements and 3) ad hoc events. Auctions include announcements and results for the US and Germany and are taken from the websites of the US Treasury and the German Finance Agency. Central bank announcements cover eight major central banks. Ad hoc events include natural catastophies, rating events, etc.</li><li>The database does currently not contain events from Bloomberg, such as macroeconomic data releases and auctions regarding France, Italy, Spain</li></ul></div><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#2">Data Format</a></li><li><a href="#3">Number of Events by Type</a></li><li><a href="#4">Number of Events by Subtype</a></li><li><a href="#5">Events over Time</a></li><li><a href="#6">Central Bank Announcements over Time</a></li><li><a href="#7">Central Bank Announcements by Intraday Time</a></li></ul></div><h2 id="2">Data Format</h2><p>display first ten rows of event database to avoid " symbols, convert strings to categorical</p><pre class="codeoutput">       eventstart           eventend            type            subtype           subsubtype                           description                        scheduled
+    ________________    ________________    ____________    _______________    ________________    ___________________________________________________    _________
 
-    04.03.2002 16:30                 NaT    "Auction"         "US Announcement"    "Bill"                "CUSIP 912795JN2"                                          true   
-    05.03.2002 05:00                 NaT    "Central Bank"    "BoJ"                "Minutes"             "Minutes on January 15/16 Meeting"                         true   
-    05.03.2002 14:00                 NaT    "Central Bank"    "BoC"                "Press Release"       ""                                                         true   
-    05.03.2002 18:00                 NaT    "Auction"         "US Result"          "Bill"                "CUSIP 912795JN2"                                          true   
-    05.03.2002 22:30                 NaT    "Central Bank"    "RBA"                "Press Release"       ""                                                         true   
-    06.03.2002 19:00                 NaT    "Central Bank"    "Fed"                "Beige Book"          "Beige Book Release"                                       true   
-    07.03.2002 12:00                 NaT    "Central Bank"    "BoE"                "Press Release"       "MPD"                                                      true   
-    07.03.2002 12:45                 NaT    "Central Bank"    "ECB"                "Press Release"       "GCM PR"                                                   true   
-    07.03.2002 13:30    07.03.2002 14:08    "Central Bank"    "ECB"                "Press Conference"    "GCM PC"                                                   true   
-    07.03.2002 15:00    07.03.2002 17:35    "Central Bank"    "Fed"                "Speech by Chair"     "Greenspan Senate Testimony (Monetary Policy Report)"      true   
+    04.03.2002 16:30                 NaT    Auction         US Announcement    Bill                CUSIP 912795JN2                                          true   
+    05.03.2002 05:00                 NaT    Central Bank    BoJ                Minutes             Minutes on January 15/16 Meeting                         true   
+    05.03.2002 14:00                 NaT    Central Bank    BoC                Press Release       -                                                        true   
+    05.03.2002 18:00                 NaT    Auction         US Result          Bill                CUSIP 912795JN2                                          true   
+    05.03.2002 22:30                 NaT    Central Bank    RBA                Press Release       -                                                        true   
+    06.03.2002 19:00                 NaT    Central Bank    Fed                Beige Book          Beige Book Release                                       true   
+    07.03.2002 12:00                 NaT    Central Bank    BoE                Press Release       MPD                                                      true   
+    07.03.2002 12:45                 NaT    Central Bank    ECB                Press Release       GCM PR                                                   true   
+    07.03.2002 13:30    07.03.2002 14:08    Central Bank    ECB                Press Conference    GCM PC                                                   true   
+    07.03.2002 15:00    07.03.2002 17:35    Central Bank    Fed                Speech by Chair     Greenspan Senate Testimony (Monetary Policy Report)      true   
 
 </pre><h2 id="3">Number of Events by Type</h2><pre class="codeoutput">    Auction    Central Bank    Ad Hoc    Total
     _______    ____________    ______    _____
 
-     10471         4516         1157     16144
+     10471         4515         1157     16143
 
 </pre><h2 id="4">Number of Events by Subtype</h2><p>For each type of event, show a "treemap" of subtypes and, if available, subsubtypes. The areas correspond to the number of events.</p><pre class="codeoutput">|||||||||||||||||||||||||||||||||||||||||||||||||| Event Type: Ad Hoc ||||||||||||||||||||||||||||||||||||||||||||||||||
 </pre><img vspace="5" hspace="5" src="EventDatabaseOverview_01.png" alt=""> <pre class="codeoutput">|||||||||||||||||||||||||||||||||||||||||||||||||| Event Type: Auction ||||||||||||||||||||||||||||||||||||||||||||||||||
@@ -94,13 +94,13 @@ table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px soli
 </pre><img vspace="5" hspace="5" src="EventDatabaseOverview_07.png" alt=""> <img vspace="5" hspace="5" src="EventDatabaseOverview_08.png" alt=""> <img vspace="5" hspace="5" src="EventDatabaseOverview_09.png" alt=""> <h2 id="6">Central Bank Announcements over Time</h2><p>number of quarterly events for each central bank</p><img vspace="5" hspace="5" src="EventDatabaseOverview_10.png" alt=""> <img vspace="5" hspace="5" src="EventDatabaseOverview_11.png" alt=""> <img vspace="5" hspace="5" src="EventDatabaseOverview_12.png" alt=""> <img vspace="5" hspace="5" src="EventDatabaseOverview_13.png" alt=""> <img vspace="5" hspace="5" src="EventDatabaseOverview_14.png" alt=""> <img vspace="5" hspace="5" src="EventDatabaseOverview_15.png" alt=""> <img vspace="5" hspace="5" src="EventDatabaseOverview_16.png" alt=""> <img vspace="5" hspace="5" src="EventDatabaseOverview_17.png" alt=""> <h2 id="7">Central Bank Announcements by Intraday Time</h2><p>number of events by hour of the day</p><img vspace="5" hspace="5" src="EventDatabaseOverview_18.png" alt=""> <p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2021b</a><br></p></div><!--
 ##### SOURCE BEGIN #####
 %% What Moves Markets?
-% This code gives a basic overview of the event database from
+% This page gives a basic overview of the event database from
 % the paper "What Moves Markets?" by Mark Kerssenfischer 
 % and Maik Schmeling
 %
 % Notes:
 %
-% * All intraday timestamps refer to GMT.
+% * All intraday timestamps refer to Greenwich Mean Time (GMT).
 % * The database currently contains three types of events: 1) auctions,
 % 2) central bank announcements and 3) ad hoc events.
 % Auctions include announcements and results for the US and Germany and are 
@@ -126,8 +126,15 @@ figsiz = [16 9];
 
 %% Data Format
 % display first ten rows of event database
-disp(Tevents(1:10,:))
+% to avoid " symbols, convert strings to categorical
+Tevents.type = categorical(Tevents.type);
+Tevents.subtype = categorical(Tevents.subtype);
+Tevents.subsubtype = categorical(Tevents.subsubtype);
+Tevents.description = categorical(Tevents.description);
+Tevents.description = fillmissing(Tevents.description, 'constant', '-');
+disp(Tevents(1:10,:));
 
+load('WhatMovesMarkets_eventdatabase.mat')
 
 %% Number of Events by Type
 % 
