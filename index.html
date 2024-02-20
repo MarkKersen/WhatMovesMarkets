@@ -67,7 +67,7 @@ table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px soli
 
 
 
-  </style></head><body><div class="content"><h1>What Moves Markets?</h1><!--introduction--><p>This page gives a basic overview of the event database from the paper "What Moves Markets?" by Mark Kerssenfischer and Maik Schmeling</p><p>Notes:</p><div><ul><li>The list of events is chronological. Intraday timestamps refer to US Eastern Time (variables "eventstart" and "eventevent") or Central European Time ("_CET" and "_CET"). The format is DD.MM.YYYY hh:mm:ss.</li><li>Each event is classified into one of four "types": 1) macroeconomic data release, 2) central bank announcement, 3) auction news and 4) other ad hoc event. These types are further subdivided into various "subtypes" and "subsubtypes".</li><li>The "description" variable contains further info on the news event and the "source" variable provides links (if available). See also the paper's appendix for details regarding the data sources. The "unscheduled" variable identifies unscheduled events (e.g. unscheduled FOMC announcements).</li><li>To make the event database more manageable, we exclude macroeconomic data releases that are not deemed important by LASSO for any asset.</li></ul></div><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#2">Data Format and Preview</a></li><li><a href="#3">Number of Events by Type</a></li><li><a href="#4">Number of Events by Subtype</a></li><li><a href="#5">Events over Time</a></li><li><a href="#6">Central Bank Announcements over Time</a></li><li><a href="#7">Central Bank Announcements by Intraday Time</a></li><li><a href="#8">Types of Announcements by Intraday Time for each Central Bank</a></li></ul></div><h2 id="2">Data Format and Preview</h2><p>display first event of each subsubtype</p><pre class="codeoutput">        eventstart              eventend                                name                               type                    subtype                                  subsubtype                                                                                                                    description                                                                                                                                                                                              source                                                                                                 scheduled      eventstart_CET          eventend_CET    
+  </style></head><body><div class="content"><h1>What Moves Markets?</h1><!--introduction--><p>This page gives a basic overview of the event database from the paper "What Moves Markets?" by Mark Kerssenfischer and Maik Schmeling</p><p>Notes:</p><div><ul><li>The list of events is chronological. Intraday timestamps refer to US Eastern Time (variables "eventstart" and "eventevent") or Central European Time (".._CET"). The format is DD.MM.YYYY hh:mm:ss.</li><li>Each event is classified into one of four "types": 1) macroeconomic data release, 2) central bank announcement, 3) auction news and 4) other ad hoc event. These types are further subdivided into various "subtypes" and "subsubtypes".</li><li>The "description" variable contains further info on the news event and the "source" variable provides links (if available). See also the paper's appendix for details regarding the data sources. The "unscheduled" variable identifies unscheduled events (e.g. unscheduled FOMC announcements).</li><li>To make the event database more manageable, we exclude macroeconomic data releases that are not deemed important by LASSO for any asset.</li></ul></div><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">import data into Matlab</a></li><li><a href="#3">Data Format and Preview</a></li><li><a href="#4">Number of Events by Type</a></li><li><a href="#5">Number of Events by Subtype</a></li><li><a href="#6">Events over Time</a></li><li><a href="#7">Central Bank Announcements over Time</a></li><li><a href="#8">Central Bank Announcements by Intraday Time</a></li><li><a href="#9">Types of Announcements by Intraday Time for each Central Bank</a></li></ul></div><h2 id="1">import data into Matlab</h2><p>T = readtimetable('WhatMovesMarkets_eventdatabase.csv');</p><p>% set timezones</p><p>T.eventstart.TimeZone = "America/New_York"; T.eventend.TimeZone = "America/New_York";</p><p>T.eventstart_CET.TimeZone = "Europe/Berlin"; T.eventend_CET.TimeZone = "Europe/Berlin";</p><h2 id="3">Data Format and Preview</h2><p>display first event of each subsubtype</p><pre class="codeoutput">        eventstart              eventend                                name                               type                    subtype                                  subsubtype                                                                                                                    description                                                                                                                                                                                              source                                                                                                 scheduled      eventstart_CET          eventend_CET    
     ___________________    ___________________    _________________________________________________    _____________    ______________________________    ______________________________________________    _______________________________________________________________________________________________________________________________________________________________________________________________________    _______________________________________________________________________________________________________________________________________________________________________________________________    _________    ___________________    ___________________
 
     01.03.2002 01:00:00                    NaT    FI Consumer Confidence                               Macro Release    FI                                Consumer Confidence                               -                                                                                                                                                                                                          Bloomberg                                                                                                                                                                                              1        01.03.2002 07:00:00                    NaT
@@ -156,22 +156,18 @@ table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px soli
     04.12.2016 17:23:00                    NaT    Ad Hoc: Trump                                        Ad Hoc           Trump                             -                                                 Did China ask us if it was OK to devalue their currency (making it hard for our companies to compete) heavily tax our products going into..                                                                Twitter for Android                                                                                                                                                                                    0        04.12.2016 23:23:00                    NaT
     31.01.2020 12:36:00                    NaT    Ad Hoc: Covid-19                                     Ad Hoc           Covid-19                          -                                                 Trump Weighs Tighter China Travel Restrictions In Response To Coronavirus - Washington Post                                                                                                                https://global.factiva.com/redir/default.aspx?P=sa&amp;an=LBA0000020200131eg1v03igt&amp;cat=a&amp;ep=ASE                                                                                                           0        31.01.2020 18:36:00                    NaT
 
-</pre><h2 id="3">Number of Events by Type</h2><pre class="codeoutput">    Macro Release    Central Bank    Auction    Ad Hoc    Total
+</pre><h2 id="4">Number of Events by Type</h2><pre class="codeoutput">    Macro Release    Central Bank    Auction    Ad Hoc    Total
     _____________    ____________    _______    ______    _____
 
         27627            8670         14055      1219     51571
 
-</pre><h2 id="4">Number of Events by Subtype</h2><p>For each type of event, show a "treemap" of subtypes and, if available, subsubtypes. The areas correspond to the number of events.</p><pre class="codeoutput">|||||||||||||||||||||||||||||||||||||||||||||||||| Event Type: Ad Hoc ||||||||||||||||||||||||||||||||||||||||||||||||||
+</pre><h2 id="5">Number of Events by Subtype</h2><p>For each type of event, show a "treemap" of subtypes and, if available, subsubtypes. The areas correspond to the number of events.</p><pre class="codeoutput">|||||||||||||||||||||||||||||||||||||||||||||||||| Event Type: Ad Hoc ||||||||||||||||||||||||||||||||||||||||||||||||||
 </pre><img vspace="5" hspace="5" src="index_01.png" alt=""> <pre class="codeoutput">|||||||||||||||||||||||||||||||||||||||||||||||||| Event Type: Auction ||||||||||||||||||||||||||||||||||||||||||||||||||
 </pre><img vspace="5" hspace="5" src="index_02.png" alt=""> <img vspace="5" hspace="5" src="index_03.png" alt=""> <pre class="codeoutput">|||||||||||||||||||||||||||||||||||||||||||||||||| Event Type: Central Bank ||||||||||||||||||||||||||||||||||||||||||||||||||
 </pre><img vspace="5" hspace="5" src="index_04.png" alt=""> <img vspace="5" hspace="5" src="index_05.png" alt=""> <pre class="codeoutput">|||||||||||||||||||||||||||||||||||||||||||||||||| Event Type: Macro Release ||||||||||||||||||||||||||||||||||||||||||||||||||
-</pre><img vspace="5" hspace="5" src="index_06.png" alt=""> <img vspace="5" hspace="5" src="index_07.png" alt=""> <h2 id="5">Events over Time</h2><pre class="codeoutput">Number of monthly events for each type:
-</pre><pre class="codeoutput error">Error using tabular/dotParenReference (line 76)
-Unrecognized table variable name 'start'.
-
-Error in index (line 110)
-    [ia,~,ic] = unique(dateshift(Tnews.start(strcmp(Tnews.type,eventtypes{i})),'start','month'));
-</pre><h2 id="6">Central Bank Announcements over Time</h2><p>number of quarterly events for each central bank</p><h2 id="7">Central Bank Announcements by Intraday Time</h2><p>number of events by hour of the day</p><h2 id="8">Types of Announcements by Intraday Time for each Central Bank</h2><p>number of events by hour of the day</p><p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2021b</a><br></p></div><!--
+</pre><img vspace="5" hspace="5" src="index_06.png" alt=""> <img vspace="5" hspace="5" src="index_07.png" alt=""> <h2 id="6">Events over Time</h2><pre class="codeoutput">Number of monthly events for each type:
+</pre><img vspace="5" hspace="5" src="index_08.png" alt=""> <pre class="codeoutput">Number of quarterly events for each subtype:
+</pre><img vspace="5" hspace="5" src="index_09.png" alt=""> <img vspace="5" hspace="5" src="index_10.png" alt=""> <img vspace="5" hspace="5" src="index_11.png" alt=""> <h2 id="7">Central Bank Announcements over Time</h2><p>number of quarterly events for each central bank</p><img vspace="5" hspace="5" src="index_12.png" alt=""> <img vspace="5" hspace="5" src="index_13.png" alt=""> <img vspace="5" hspace="5" src="index_14.png" alt=""> <img vspace="5" hspace="5" src="index_15.png" alt=""> <img vspace="5" hspace="5" src="index_16.png" alt=""> <img vspace="5" hspace="5" src="index_17.png" alt=""> <img vspace="5" hspace="5" src="index_18.png" alt=""> <img vspace="5" hspace="5" src="index_19.png" alt=""> <h2 id="8">Central Bank Announcements by Intraday Time</h2><p>number of events by hour of the day</p><img vspace="5" hspace="5" src="index_20.png" alt=""> <h2 id="9">Types of Announcements by Intraday Time for each Central Bank</h2><p>number of events by hour of the day</p><img vspace="5" hspace="5" src="index_21.png" alt=""> <img vspace="5" hspace="5" src="index_22.png" alt=""> <img vspace="5" hspace="5" src="index_23.png" alt=""> <img vspace="5" hspace="5" src="index_24.png" alt=""> <img vspace="5" hspace="5" src="index_25.png" alt=""> <img vspace="5" hspace="5" src="index_26.png" alt=""> <img vspace="5" hspace="5" src="index_27.png" alt=""> <img vspace="5" hspace="5" src="index_28.png" alt=""> <p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2021b</a><br></p></div><!--
 ##### SOURCE BEGIN #####
 %% What Moves Markets?
 % This page gives a basic overview of the event database from
@@ -181,8 +177,8 @@ Error in index (line 110)
 % Notes:
 %
 % * The list of events is chronological. Intraday timestamps refer to US 
-% Eastern Time (variables "eventstart" and "eventevent") or Central European Time
-% ("_CET" and "_CET"). The format is DD.MM.YYYY hh:mm:ss.
+% Eastern Time (variables "eventstart" and "eventevent") or Central European 
+% Time (".._CET"). The format is DD.MM.YYYY hh:mm:ss.
 % * Each event is classified into one of four "types": 1) macroeconomic 
 % data release, 2) central bank announcement, 3) auction news and 4) other
 % ad hoc event. These types are further subdivided into various "subtypes"
@@ -194,6 +190,17 @@ Error in index (line 110)
 % unscheduled FOMC announcements).
 % * To make the event database more manageable, we exclude macroeconomic 
 % data releases that are not deemed important by LASSO for any asset.
+
+%% import data into Matlab
+% T = readtimetable('WhatMovesMarkets_eventdatabase.csv');
+% 
+% % set timezones
+%
+% T.eventstart.TimeZone = "America/New_York";
+% T.eventend.TimeZone = "America/New_York";
+%
+% T.eventstart_CET.TimeZone = "Europe/Berlin";
+% T.eventend_CET.TimeZone = "Europe/Berlin";
 
 %%
 clear
@@ -282,7 +289,7 @@ eventtypes = unique(Tnews.type);
 figure
 hold on
 for i=1:length(eventtypes)
-    [ia,~,ic] = unique(dateshift(Tnews.start(strcmp(Tnews.type,eventtypes{i})),'start','month'));
+    [ia,~,ic] = unique(dateshift(Tnews.eventstart(strcmp(Tnews.type,eventtypes{i})),'start','month'));
     plot(ia,accumarray(ic,1),'LineWidth',2)
     grid on
 end
@@ -293,10 +300,10 @@ snapnow;
 fprintf('Number of quarterly events for each subtype:\n')
 subtypes = cell(1,length(eventtypes));
 for i=1:length(eventtypes)-1
-    Tsubtyp = timetable('RowTimes',unique(dateshift(Tnews.start,'start','quarter')));
+    Tsubtyp = timetable('RowTimes',unique(dateshift(Tnews.eventstart,'start','quarter')));
     subtypes = unique(Tnews.subtype(strcmp(Tnews.type,eventtypes{i})));    
     for ii=1:length(subtypes)
-        [ia,~,ic] = unique(dateshift(Tnews.start(strcmp(Tnews.type,eventtypes{i}) & ...
+        [ia,~,ic] = unique(dateshift(Tnews.eventstart(strcmp(Tnews.type,eventtypes{i}) & ...
             strcmp(Tnews.subtype,subtypes{ii})),'start','quarter'));
         Tsubtyp = outerjoin(Tsubtyp,array2timetable(accumarray(ic,1),'RowTimes',ia,'VariableNames',subtypes(ii)));
     end
@@ -318,10 +325,10 @@ end
 % number of quarterly events for each central bank
 
 for i=1:length(cblist)
-    Tcb = timetable('RowTimes',unique(dateshift(Tnews.start,'start','quarter')));  
+    Tcb = timetable('RowTimes',unique(dateshift(Tnews.eventstart,'start','quarter')));  
     subsubtypes = unique(Tnews.subsubtype(strcmp(Tnews.subtype,cblist{i})));    
     for ii=1:length(subsubtypes)        
-        [ia,~,ic] = unique(dateshift(Tnews.start(strcmp(Tnews.subtype,cblist{i}) & strcmp(Tnews.subsubtype,subsubtypes{ii})),'start','quarter'));
+        [ia,~,ic] = unique(dateshift(Tnews.eventstart(strcmp(Tnews.subtype,cblist{i}) & strcmp(Tnews.subsubtype,subsubtypes{ii})),'start','quarter'));
        
         Tcb = outerjoin(Tcb,array2timetable(accumarray(ic,1),'RowTimes',ia,'VariableNames',subsubtypes(ii)));
     end
@@ -342,10 +349,10 @@ end
 %% Central Bank Announcements by Intraday Time
 % number of events by hour of the day
 
-Tcb_t = timetable('RowTimes',duration(unique(Tnews.start.Hour),0,0));
+Tcb_t = timetable('RowTimes',duration(unique(Tnews.eventstart.Hour),0,0));
 
 for i=1:length(cblist)
-    [ia,~,ic] = unique(Tnews.start.Hour(strcmp(Tnews.type,'Central Bank') & ...
+    [ia,~,ic] = unique(Tnews.eventstart.Hour(strcmp(Tnews.type,'Central Bank') & ...
         strcmp(Tnews.subtype,cblist{i})));
     Tcb_t = outerjoin(Tcb_t,array2timetable(accumarray(ic,1),'RowTimes',duration(ia,0,0),'VariableNames',cblist(i)));
 end
@@ -365,7 +372,7 @@ for j=1:length(cblist)
     
 Tcb_t = Tnews(strcmp(Tnews.type,'Central Bank') & ...
         strcmp(Tnews.subtype,cblist{j}),:);
-Tcb_t.Hour = string(Tcb_t.start.Hour);
+Tcb_t.Hour = string(Tcb_t.eventstart.Hour);
 Tcb_t = timetable2table(Tcb_t,"ConvertRowTimes",false);
 
 Tcb_tf = timetable('RowTimes',duration(0:23,0,0));
